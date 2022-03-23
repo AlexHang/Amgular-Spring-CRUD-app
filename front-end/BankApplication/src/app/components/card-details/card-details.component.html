@@ -1,1 +1,43 @@
-<p>card-details works!</p>
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentCreditCard.id">
+        <h4>Credit Card</h4>
+        <div>
+            <label><strong>Account:</strong></label> {{ currentCreditCard.accountNr }}
+        </div>
+        <div>
+            <label><strong>owner:</strong></label>
+            {{ currentCreditCard.owner }}
+        </div>
+        <div>
+            <label><strong>Status:</strong></label>
+            {{ currentCreditCard.balance}}
+        </div>
+        <a class="badge badge-warning" routerLink="/credit-card/{{ currentCreditCard.id }}">
+            Edit
+        </a>
+    </div>
+    <div *ngIf="!currentCreditCard">
+        <br />
+        <p>Please click on a card...</p>
+    </div>
+</div>
+<ng-template #editable>
+    <div *ngIf="currentCreditCard.id" class="edit-form">
+        <h4>Credit Card</h4>
+        <form>
+            <div class="form-group">
+                <label for="accountNr">AccountNr</label>
+                <input type="text" class="form-control" id="accountNr" [(ngModel)]="currentCreditCard.accountNr" name="title" />
+            </div>
+            <div class="form-group">
+                <label for="owner">Description</label>
+                <input type="text" class="form-control" id="owner" [(ngModel)]="currentCreditCard.owner"
+                    name="description" />
+            </div>
+            <div class="form-group">
+                <label><strong>Balance:</strong></label>
+                {{ currentCreditCard.balance }}
+            </div>
+        </form>
+    </div>
+</ng-template>
